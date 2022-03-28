@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header([[${titulo]])" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<body>
+	<div class="container-fluid">
+		<div th:fragment="menu">
+			<div>
+
+				<form th:action="@{/logout}" method="post" th:hidden="true"
+					name="logoutForm">
+					<input type="submit" />
+				</form>
+				<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+					<a class="navbar-brand" th:href="@{/}"> <img class="m-3"
+						style="max-width: 80px" th:src="@{/images/logo.png}" />
+					</a>
+					<button class="navbar-toggler" type="button"
+						data-bs-toggle="collapse" data-bs-target="#topNavbar">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse " id=topNavbar>
+						<ul class="navbar-nav">
+							<li><span class="fas fa-user fa-2x icon-dark"></span></li>
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+								th:href="@{/conta}" sec:authentication="principal.nome"> </a>
+
+								<div class="dropdown-menu">
+									<a class="dropdown-item" id="logoutLink" href="">Logout</a>
+								</div></li>
+
+							<li class="nav-item"
+								sec:authorize="hasAuthority('Administrador')"><a
+								class="nav-link" th:href="@{/usuarios}">Usuários</a></li>
+							<li class="nav-item"
+							sec:authorize="hasAnyAuthority('Administrador','Estoquista')"><a class="nav-link"
+								th:href="@{/produtos}">Produtos</a></li>
+
+						<!-- <li class="nav-item"
+								sec:authorize="hasAuthority('Administrador')"><a
+								class="nav-link" th:href="@{/categorias}">Categorias</a></li>-->
+							<!-- 
+						<li class="nav-item"><a class="nav-link" th:href="@{/marcas}">Marcas</a></li>
+													<li class="nav-item"><a class="nav-link"
+							th:href="@{/pedidos}">Pedidos</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/clientes}">Clientes</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/envios}">Envios</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/relatorioVendas}">Relatório de vendas</a></li>
+						
+						<li class="nav-item"><a class="nav-link" th:href="@{/menus}">Menus</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/configuracoes}">Configurações</a></li> -->
+
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

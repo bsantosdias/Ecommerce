@@ -1,0 +1,25 @@
+package com.ecommerce.admin.usuario.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ecommerce.admin.usuario.UsuarioService;
+
+
+@RestController
+public class UsuarioRestController {
+
+	@Autowired
+	private UsuarioService service;
+
+	@PostMapping("/usuarios/checar_email")
+	public String checarEmailDuplicado(@Param("email") String email, @Param("id") Integer id) {
+		if (id == null) {
+			return service.emailUnico(email) ? "OK" : "Duplicado";
+		} else {		
+			return "OK";
+		}
+	}
+}

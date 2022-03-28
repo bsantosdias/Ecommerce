@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head
+	th:replace="fragmentos :: header('Página inicial do administrador', 'none')" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<body>
+	<div class="container-fluid">
+		<div th:replace="menu_navegacao :: menu"></div>
+		<div>
+			<h1>Painel de controle do administrador</h1>
+
+		</div>
+	</div>
+</body>
+
+</html>

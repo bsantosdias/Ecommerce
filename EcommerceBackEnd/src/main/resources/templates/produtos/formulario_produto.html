@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<head th:replace="fragmentos :: header(${titulo}, 'tag')" />
+	<link rel="stylesheet" th:href="@{/richtext/richtext.min.css}"/>
+	<script th:src="@{/richtext/jquery.richtext.min.js}"></script>
+</head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<body>
+	<div class="container-fluid">
+		<div th:replace="menu_navegacao :: menu"></div>
+		<div>
+			<h2>[[${titulo}]]</h2>
+
+		</div>
+
+		<form th:action="@{/produtos/salvar}" method="post"
+			th:object=${produto} onsubmit="return verificarProdutoUnico(this)">
+			<input type="hidden" th:field="*{id}">
+
+			<div>
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active" data-bs-toggle="tab"
+							data-bs-target="#visao-geral" type="button" role="tab">Visão
+							Geral</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" data-bs-toggle="tab"
+							data-bs-target="#descricao" type="button" role="tab">Descrição</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" data-bs-toggle="tab"
+							data-bs-target="#imagens" type="button" role="tab">Imagens</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" data-bs-toggle="tab"
+							data-bs-target="#detalhes" type="button" role="tab">Detalhes</button>
+					</li>
+				</ul>
+
+				<!-- Painéis -->
+				<div class="tab-content">
+					<div class="tab-pane active p-3" id="visao-geral" role="tabpanel">
+						<div th:replace="produtos/visao_geral :: contexto"></div>
+					</div>
+					<div class="tab-pane" id="descricao" role="tabpanel">
+						<div th:replace="produtos/descricao :: contexto"></div>
+					</div>
+					<div class="tab-pane" id="imagens" role="tabpanel">...</div>
+					<div class="tab-pane" id="detalhes" role="tabpanel">
+						<div th:replace="produtos/detalhes :: contexto"></div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="text-center">
+					<input type="submit" value="Salvar" class="btn btn-primary m-3" />
+					<input type="button" value="Cancelar" class="btn btn-secondary"
+						id="botaoCancelar" />
+				</div>
+			</div>
+		</form>
+	</div>
+	
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#descricaoCurta").richText();
+		$("#descricaoLonga").richText();
+	})
+/*
+	function verificarProdutoUnico(form){
+		prodId = $("#id").val();
+		prodNome = $("#nome").val();
+		
+		url = "[[@{/produtos/verificar}]]";
+		
+		parametros = {id: prodId, nome: prodNome};
+		
+		$.post(url, parametros, function(resposta){
+			if(resposta == "OK"){
+				form.submit;
+			}else if(resposta == "Duplicado"){
+				showWarningModal("Há outro produto com o mesmo nome: "+prodNome);
+			}else{
+				showErrorModal("Sem resposta do servidor");
+			}
+		}).fail(function(){
+			showErrorModal("Incapaz de se conectar com o servidor");
+		})
+		
+		return false;
+	}
+*/
+
+</script>	
+<script th:src="@{/js/comum.js}"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragmentos :: header('Produtos', 'none')" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<body>
+	<div class="container-fluid">
+		<div th:replace="menu_navegacao :: menu"></div>
+		<div>
+			<h1>Controle de Produtos</h1>
+			<a th:href="@{/produtos/cadastrar}"
+				class="fa-solid fa-circle-plus fa-2x icon-dark"></a>
+		</div>
+
+		<div>
+			<form th:action="@{/usuarios/pagina/1}" class="form-inline m-2">
+				Pesquisa:&nbsp; <input type="search" name="keyword" required
+					class="" /> &nbsp;&nbsp; <input type="submit" value="Procurar"
+					class="btn btn-outline-primary" /> &nbsp;&nbsp;<input
+					type="submit" value="Limpar" class="btn btn-secondary"
+					onclick="limparPesquisa()" />
+			</form>
+		</div>
+		<div>
+			<table class="table table-bordered table-sriped table-hover">
+				<thead class="table-dark">
+					<tr>
+						<th>ID</th>
+						<th>Imagem Principal</th>
+						<th>Nome</th>
+						<th>Status</th>
+						<th>Configuração</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="produto : ${listaProdutos}">
+						<td>[[${produto.id}]]</td>
+						<td></td>
+						<td>[[${produto.nome}]]</td>
+						
+						<td><a th:if="${produto.ativado == true}"
+							class="fa-solid fa-circle-check fa-2x icon-green "
+							th:href="@{'/produtos/' + ${produto.id} + '/ativado/false'}"							
+							title="Desativar Produto"></a> <a
+							th:if="${produto.ativado == false}"
+							
+							class="fa-solid fa-circle fa-2x icon-dark"
+							th:href="@{'/produtos/' + ${produto.id} + '/ativado/true'}"
+							title="Ativar Produto"></a></td>
+							
+						<td><a class="fas fa-file-alt fa-2x icon-green"						
+							th:href="@{'/produtos/detalhes/' + ${produto.id}}"
+							title="Mostrar detalhes do produto"> </a>&nbsp;&nbsp; <a
+							class="fa-solid fa-user-pen fa-2x icon-dark "
+							th:href="@{'/produtos/editar/' + ${produto.id}}"
+							title="Editar Produto"> </a>&nbsp;&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</body>
+
+</html>

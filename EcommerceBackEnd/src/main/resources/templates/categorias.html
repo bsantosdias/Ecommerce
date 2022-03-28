@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragmentos :: header('Categorias', 'none')" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<body>
+	<div class="container-fluid">
+		<div th:replace="menu_navegacao :: menu"></div>
+		<div>
+			<h2>Cadastrar Categorias</h2>
+
+			<a th:href="@{/categorias/cadastrar}" class="fa-solid fa-user-plus fa-2x icon-dark m-2"></a>
+		</div>
+		<form th:action="@{/categorias/pagina/1}" class="form-inline m-3">
+			Pesquisa:&nbsp; <input type="search" name="keyword"
+				th:value="${keyword}" required /> &nbsp;&nbsp;
+			<input type="submit" value="Procurar" class="btn btn-outline-primary" />
+			<button type="button" class="btn btn-primary">
+				<i class="fas fa-eraser"></i>
+			</button>
+		</form>
+	</div>
+
+	<div class="detalhes">
+		<table
+			class="table table-bordered table-striped table-hove table-responsive-xl">
+			<thead class="thead-dark">
+				<tr>
+					<!-- <th>ID Categoria</th>-->
+					<th>Nome</th>
+					<!-- <th>Imagem</th> -->
+					<th>Status</th>
+					<th>Configuração</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="categoria : ${listaCategoria}">
+					<!-- <td>[[${categoria.id}]]</td>-->
+					<td>[[${categoria.nome}]]</td>
+					<!-- <th>[[${categoria.imagem}]]</th>-->
+					
+					<td><a th:if="${categoria.ativado == true}"
+							class="fa-solid fa-circle-check fa-2x icon-green "
+							th:href="@{'/categorias/' + ${categoria.id} + '/ativado/false'}"
+							title="Desativar Categoria"></a> <a
+							
+							th:if="${categoria.ativado == false}"
+							class="fa-solid fa-circle fa-2x icon-dark"
+							th:href="@{'/categorias/' + ${categoria.id} + '/ativado/true'}"
+							title="Ativar Categoria"></a></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

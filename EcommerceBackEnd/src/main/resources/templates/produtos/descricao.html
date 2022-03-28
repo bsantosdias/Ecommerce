@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<body>
+	<div th:fragment="contexto" th:remove="tag" class="text-center">
+		<div class="m-2 ">
+			<label>Descrição curta: </label>
+			<textarea class="form-control icon-dark" th:field="*{descricaoCurta}" rows="2" required> 
+				
+			</textarea>
+		</div>
+
+		<div class="m-2">
+			<label>Descrição Longa: </label>
+			<textarea class="form-control" th:field="*{descricaoLonga}" rows="5"
+				required> 
+				
+			</textarea>
+		</div>
+	</div>
+</body>
+
+</html>
